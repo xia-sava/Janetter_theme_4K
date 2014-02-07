@@ -1,0 +1,12 @@
+@import "../../../Common/css/style.css";
+@import "../../../Common/css/base.css";
+@import "../../../Common/css/list.css";
+
+#header,
+#footer,
+#main,
+.contextmenu li
+{
+  zoom: 1.8;
+}
+

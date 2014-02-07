@@ -1,0 +1,48 @@
+@charset "utf-8";
+@import "../../Black/css/notice.css";
+
+#wrapper {
+  background: black !important;
+}
+
+.titlebar {
+  background: black;
+}
+
+.tweet-container a,
+.tweet-container a:link,
+.tweet-container a:visited {
+  color: rgb(255,255,128);
+}
+.tweet-container a:hover,
+.tweet-container a:active {
+  color: rgb(255,255,128);
+}
+li.notice_timeline span.timeline-tab-text a:link,
+div.tweet-container .event-title a:link{
+  color: #EEE;
+}
+div.tweet-container:hover .event-title a{
+  color: #EEE;
+}
+li.notice_timeline span.timeline-tab-text a:hover,
+div.tweet-container .event-title a:hover{
+  color: #EEE;
+  text-decoration:underline;
+}
+div.tweet-container {
+  color: white;
+}
+
+div.event-title .user:hover .source-title .screen_name,
+div.event-title .user:hover .source-title .name {
+  color: #EEE;
+}
+
+.contextmenu li,
+div.text
+{
+  zoom: 1.8;
+  line-height: 1.1em;
+}
+

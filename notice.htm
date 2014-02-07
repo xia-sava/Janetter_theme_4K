@@ -1,0 +1,288 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Notice</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../Common/css/base.css">
+<link rel="stylesheet" href="../../Common/css/style.css">
+<link rel="stylesheet" href="../../Common/template/tweet.css">
+<link rel="stylesheet" href="../../Items/Black/css/black.css">
+<link rel="stylesheet" href="css/notice.css">
+<script src="../../Common/js/base.include.js"></script>
+<script src="../../Common/notice/js/include.js"></script>
+<script src="../../Common/notice/js/notice.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+		<div class="titlebar">
+			<a href="#" class="restore-janetter"><div class="logo"></div></a>
+			<a href="#" class="close_all"><div class="timeline-title-close icon-close-l"></div></a>
+		</div>
+		<ul id="notice_events"></ul>
+		<ul id="notice_timelines"></ul>
+		<div id="detail_wrapper"></div>
+	</div>
+	<ul id="contextmenu-link" class="jeegoocontext contextmenu">
+		<li action="openbrowser" transtext="openBrowser"></li>
+		<li action="copyurl" transtext="copyUrl"></li>
+		<li action="copyexpandedurl" transtext="copyExpandedUrl"></li>
+	</ul>
+	<ul id="contextmenu-reply" class="jeegoocontext contextmenu">
+		<li action="replyto" transtext="replyTo"></li>
+		<li action="dmto" transtext="message"></li>
+	</ul>
+	<ul id="contextmenu-replydm" class="jeegoocontext contextmenu">
+		<li action="dmto" transtext="message"></li>
+		<li action="mentionto" transtext="replyTo"></li>
+	</ul>
+	<ul id="contextmenu-rt" class="jeegoocontext contextmenu">
+		<li action="retweet" transtext="retweet"></li>
+		<li action="quote" transtext="quote"></li>
+	</ul>
+	<ul id="contextmenu-fav" class="jeegoocontext contextmenu">
+		<li action="favorite" transtext="addFav"></li>
+		<li action="removefav" transtext="removeFav"></li>
+	</ul>
+	<ul id="contextmenu-user" class="jeegoocontext contextmenu">
+		<li action="copytext" transtext="copy"></li>
+		<li action="user" transtext="openProfile"></li>
+		<li action="opentwitter" transtext="openTwitter"></li>
+	</ul>
+	<ul id="contextmenu-hash" class="jeegoocontext contextmenu">
+		<li action="copytext" transtext="copy"></li>
+		<li action="twsearch" class="icon">
+			<span class="icon twitter"></span>
+			<span transtext="twitterSearch"></span>
+		</li>
+	</ul>
+	<ul id="contextmenu-selecttext" class="jeegoocontext contextmenu">
+		<li action="copy" transtext="copy"></li>
+		<li class="separator"></li>
+		<li action="websearch" class="icon">
+			<span class="icon search"></span>
+			<span transtext="webSearch"></span>
+		</li>
+		<li action="amznsearch" class="icon">
+			<span class="icon amazon"></span>
+			<span transtext="amazonSearch"></span>
+		</li>
+		<li action="twsearch" class="icon">
+			<span class="icon twitter"></span>
+			<span transtext="twitterSearch"></span>
+		</li>
+	</ul>
+<!-- Template -->
+<!-- wrapper -->
+<script id="timeline_tpl" type="text/jarty">
+{* <![CDATA[ *}
+<li class="notice_timeline timeline-tab open_detail" data-timeline-key="{$key}" data-tltype="{$type}" data-api="{$api}" data-juid="{$juid}">
+<div>
+<a href="#" action="opentl" class="opentl">
+	<div class="timeline-tab-icon mini-icon-{$type}"></div>
+	{if $type != "search" && $type != "list"}
+	<img class="timeline-tab-profile-icon" src="{$profile_image_url}" alt="">
+	{/if}
+</a>
+<span class="timeline-tab-text {if $type == "search" || $type == "list"}no-profile-icon{/if}">
+	<a href="#" action="opentl" class="opentl">{$title}</a> (<span class="total_count">0</span> tweet<span class="plural">s</span>)
+</span>
+<a class="hide closeone"><div class="timeline-title-close icon-close"/></a>
+<a class="service-icon"><div class="timeline-title-t icon-t"/></a>
+</div>
+</li>
+{* ]]> *}
+</script>
+<script id="event_tpl" type="text/jarty">
+{* <![CDATA[ *}
+<li class="notice_timeline notice_event timeline-tab open_detail" data-timeline-key="{$key}" data-event-type="{$type}" data-juid="event">
+<div>
+<a href="#" action="opentl" class="opentl">
+<div class="timeline-tab-icon mini-icon-{$type}"></div>
+<img class="timeline-tab-profile-icon" src="{$profile_image_url}" alt="">
+</a>
+<span class="timeline-tab-text">
+	<strong>{$title}</strong><span class="plural"> (<span class="total_count">0</span>)</span>
+</span>
+<a class="hide closeone"><div class="timeline-title-close icon-close"/></a>
+<a class="service-icon"><div class="timeline-title-t icon-t"/></a>
+</div>
+</li>
+{* ]]> *}
+</script>
+<!-- wrapper -->
+<script id="tweet_container_wrapper_tpl" type="text/jarty">
+{* <![CDATA[ *}
+<div class="detail" data-timeline-key="{$key}" data-juid="{$juid}">
+	<div class="tweet-container-wrapper"></div>
+	<a href="#" class="hide_detail show_mouseover"><div class="hide_detail"></div></a>
+	<a href="#" class="moveprev"><div class="leftbtn"></div></a>
+	<div class="notice-count plural">/</div>
+	<div class="current_count plural">0</div>
+	<div class="total_count plural">0</div>
+	<a href="#" class="movenext"><div class="rightbtn"></div></a>
+</div>
+{* ]]> *}
+</script>
+<!-- container -->
+<script id="tweet_container_tpl" type="text/jarty">
+{* <![CDATA[ *}
+<div class="tweet-container" data-tweet-id="{$tweet_id}">
+	<div class="tweet-detail">
+		{if $retweeted_by}
+		<div class="profile-box">
+			<p class="main-profile">
+				<a href="#" action="user" screenname="{$screen_name}" title="{$screen_name}"><img src="{$profile_image_url}"></a>
+			</p>
+			<p class="sub-profile">
+				<a href="#" action="user" screenname="{$retweeted_by}" title="{$retweeted_by}"><img src="{$rt_profile_image_url}"></a>
+			</p>
+			<div class="icon-rt"></div>
+		</div>
+		{else}
+			<div class="profimg"><a href="#" class="user" action="user" screenname="{$screen_name}" title="{$screen_name}"><img src="{$profile_image_url}" alt=""></a></div>
+		{/if}
+		<div class="title">
+			{$displayname}
+		</div>
+		<div class="text {$char_size}">{$tweet_text}</div>
+		{if $retweeted_by}
+			<p class="retweetedBy">
+				<span>Retweeted by </span>
+				@<a action="user" screenname="{$retweeted_by}"><span class="retweeted_screen_name">{$retweeted_by}</span></a>
+			</p>
+		{/if}
+		<div class="tweet-button show_mouseover">
+			<ul>
+				<li class="do_read"><a action="read" href="#"><div class="tl-icon-read"></div></a></li>
+				{if !$tweet.isMe}
+					<li class="do_mention"><a action="reply" href="#"><div class="tl-icon-reply"></div></a></li>
+				{/if}
+				{if !$tweet.isMe && !$tweet.isDM && !$user.protected}
+					<li class="do_retweet"><a action="rt" href="#"><div class="tl-icon-rt"></div></a></li>
+				{/if}
+				{if !$tweet.isDM}
+					<li class="do_favorite"><a action="fav" href="#"><div class="tl-icon-fav"></div></a></li>
+				{/if}
+			</ul>
+		</div>
+	</div>
+</div>
+{* ]]> *}
+</script>
+<script id="tweet_container_follow_tpl" type="text/jarty">
+{* <![CDATA[ *}
+<div class="tweet-container" data-tweet-id="{$target_object.id_str}">
+	<div class="event-title">
+		<div class="timeline-tab-icon mini-icon-follow"></div>
+		by
+		<a href="#" class="user" action="user" screenname="{$source.screen_name}" title="{$source.name}">
+			<img class="timeline-tab-profile-icon" src="{$source.profile_image_url}">
+			<span class="source-title">
+				{$displayname}
+			</span>
+		</a>
+	</div>
+	<div class="event-detail">
+		<div class="profimg"><a href="#" class="user" action="user" screenname="{$source.screen_name}" title="{$source.name}"><img src="{$source.profile_image_url}" alt=""></a></div>
+		<div class="title">
+			{$displayname}
+		</div>
+		<div class="text {$char_size}">{$source.description}</div>
+	</div>
+</div>
+{* ]]> *}
+</script>
+<script id="tweet_container_favorite_tpl" type="text/jarty">
+{* <![CDATA[ *}
+<div class="tweet-container" data-tweet-id="{$target_object.id_str}">
+	<div class="event-title">
+		<div class="timeline-tab-icon mini-icon-favorite"></div>
+		by
+		<a href="#" class="user" action="user" screenname="{$source.screen_name}" title="{$source.name}">
+			<img class="timeline-tab-profile-icon" src="{$source.profile_image_url}">
+			<span class="source-title">
+				{$displayname_source}
+			</span>
+		</a>
+	</div>
+	<div class="event-detail">
+		<div class="profimg"><a href="#" class="user" action="user" screenname="{$target.screen_name}" title="{$target.screen_name}"><img src="{$target.profile_image_url}" alt=""></a></div>
+		<div class="title">
+			{$displayname}
+		</div>
+		<div class="text {$char_size}">{$target_object.text}</div>
+	</div>
+</div>
+{* ]]> *}
+</script>
+<script id="tweet_container_list_user_subscribed_tpl" type="text/jarty">
+{* <![CDATA[ *}
+<div class="tweet-container" data-tweet-id="{$target_object.id_str}">
+	<div class="event-title">
+		<div class="timeline-tab-icon mini-icon-list_user_subscribed"></div>
+		by
+		<a href="#" class="user" action="user" screenname="{$source.screen_name}" title="{$source.name}">
+			<img class="timeline-tab-profile-icon" src="{$source.profile_image_url}">
+			<span class="source-title">
+				{$displayname_source}
+			</span>
+		</a>
+	</div>
+	<div class="event-detail">
+		<div class="profimg"><a href="#" class="user" action="user" screenname="{$target.screen_name}" title="{$target.name}"><img src="{$target.profile_image_url}" alt=""></a></div>
+		<div class="title">
+			<a href="http://twitter.com{$target_object.uri}"><span class="screen_name">{$target_object.name}</span></a>
+		</div>
+		<div class="text {$char_size}">{$target_object.description}</div>
+	</div>
+</div>
+{* ]]> *}
+</script>
+<script id="tweet_container_list_member_added_tpl" type="text/jarty">
+{* <![CDATA[ *}
+<div class="tweet-container" data-tweet-id="{$target_object.id_str}">
+	<div class="event-title">
+		<div class="timeline-tab-icon mini-icon-list_member_added"></div>
+		by
+		<a href="#" class="user" action="user" screenname="{$source.screen_name}" title="{$source.name}">
+			<img class="timeline-tab-profile-icon" src="{$source.profile_image_url}">
+			<span class="source-title">
+				{$displayname_source}
+			</span>
+		</a>
+	</div>
+	<div class="event-detail">
+		<div class="profimg"><a href="#" class="user" action="user" screenname="{$source.screen_name}" title="{$source.name}"><img src="{$source.profile_image_url}" alt=""></a></div>
+		<div class="title">
+			<a href="http://twitter.com{$target_object.uri}"><span class="screen_name">{$target_object.name}</span></a>
+		</div>
+		<div class="text {$char_size}">{$target_object.description}</div>
+	</div>
+</div>
+{* ]]> *}
+</script>
+<script id="tweet_container_retweet_tpl" type="text/jarty">
+{* <![CDATA[ *}
+<div class="tweet-container" data-tweet-id="{$target_object.id_str}">
+	<div class="event-title">
+		<div class="timeline-tab-icon mini-icon-retweet"></div>
+		by
+		<a href="#" class="user" action="user" screenname="{$source.screen_name}" title="{$source.name}">
+			<img class="timeline-tab-profile-icon" src="{$source.profile_image_url}">
+			<span class="source-title">
+				{$displayname_source}
+			</span>
+		</a>
+	</div>
+	<div class="event-detail">
+		<div class="profimg"><a href="#" class="user" action="user" screenname="{$target.screen_name}" title="{$target.name}"><img src="{$target.profile_image_url}" alt=""></a></div>
+		<div class="title">
+			{$displayname}
+		</div>
+		<div class="text {$char_size}">{$target_object.text}</div>
+	</div>
+</div>
+{* ]]> *}
+</script>
+</body>
+</html>

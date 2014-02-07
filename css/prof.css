@@ -1,0 +1,22 @@
+@charset "utf-8";
+@import "../../Black/css/prof.css";
+
+
+.contextmenu li,
+.tab01 .prof-content ul li dd > p,
+.tab01 .prof-content ul li dd > a,
+.tab01 .prof-content ul li dd > span,
+.tab02 .tweet-content,
+.tab02 .tweet-thumb,
+.tab02 .tweet-reply-box,
+.tab03 .tweet-content,
+.tab03 .tweet-thumb,
+.tab03 .tweet-reply-box,
+.tab04 .tweet-content,
+.tab04 .tweet-thumb,
+.tab04 .tweet-reply-box
+{
+  zoom: 1.8;
+  line-height: 1.1em;
+}
+

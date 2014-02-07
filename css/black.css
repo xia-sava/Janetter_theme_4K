@@ -1,0 +1,10 @@
+@charset'utf-8';
+@import "../../Black/css/black.css";
+
+body {
+  background: black;
+}
+
+.timeline-main::-webkit-scrollbar-thumb {
+  background: rgba(102, 102, 102, 0.8);
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Janet</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/main.css" id="maincss">
+<link rel="stylesheet" href="css/black.css">
+<script src="../../Common/js/base.include.js"></script>
+<script src="../../Common/js/janet.include.js"></script>
+</head>
+<body>
+	<div id="header">
+		<div id="menu">
+			<div class="menu-pad-left"></div>
+			<div class="menu-item-left menu-bg">
+				<a action="selectlist" tltype="home" transtitle="home"><div class="menu-icon-home"></div></a>
+			</div>
+			<div class="menu-item-left menu-bg">
+				<a action="selectlist" tltype="mention" transtitle="mentions"><div class="menu-icon-mention"></div></a>
+			</div>
+			<div class="menu-item-left menu-bg">
+				<a action="selectlist" tltype="message" transtitle="messages"><div class="menu-icon-direct"></div></a>
+			</div>
+			<div class="menu-item-left menu-bg">
+				<a action="selectlist" tltype="list" transtitle="lists"><div class="menu-icon-list"></div></a>
+			</div>
+			<div class="menu-item-left menu-bg">
+				<a action="selectlist" tltype="search" transtitle="search"><div class="menu-icon-search"></div></a>
+			</div>
+			<div class="menu-item-right">
+				<a action="options" transtitle="options"><div class="menu-icon-gear"></div></a>
+			</div>
+			<div class="white-line"></div>
+		</div>
+		<div id="tweet-edit-bar">
+			<div id="tweet-edit-dummy" tabindex="0"></div>
+			<div id="tweet-edit-container">
+				<div class="compact">
+					<a action="openedit">
+						<div class="tweet-edit-box">
+							<div>
+								<textarea class="tweet-edit" transplaceholder="whatsHappening" disabled></textarea>
+							</div>
+						</div>
+					</a>
+					<div class="tweet-edit-account">
+						<div>
+							<a transtitle="changeAccount" action="openedit_changeaccount" selectaction="changeaccount">
+								<img class="profile-image" src="../../Common/images/main/loading_image.gif">
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="expanded">
+					<div class="tweet-edit-main">
+						<div class="tweet-edit-box">
+							<div>
+								<div class="tweet-edit-dm">
+									<input type="text" class="dm-edit">
+									<span class="tweet-edit-dm-element" transtext="messageTo"></span>
+									<a action="edit-dm-close"><div class="close"></div></a>
+								</div>
+								<a action="edit-reset-close" transtitle="close"><div class="close"></div></a>
+								<textarea class="tweet-edit" transplaceholder="whatsHappening"></textarea>
+								<div class="tweet-edit-thumb"></div>
+							</div>
+						</div>
+						<div class="tweet-edit-account">
+							<div>
+								<a transtitle="changeAccount" action="account" selectaction="changeaccount">
+									<img class="profile-image" src="../../Common/images/main/loading_image.gif">
+									<div class="icon-pulldown"></div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="tweet-edit-menu">
+						<a transtitle="shortenURL" action="shortenurl"><div class="icon-url"></div></a>
+						<a transtitle="photo" action="photo"><div class="icon-pic"></div></a>
+						<a transtitle="draftMenu" action="draftmenu"><div class="icon-save"></div></a>
+						<a transtitle="message" action="dmedit" class="editdm"><div class="icon-editdm"></div></a>
+						<a transtitle="edithash" action="edit-hash"><div class="icon-edithash"></div></a>
+						<a transtitle="sendTweet" transtext="tweet" class="tweet-button button disabled" action="sendtweet"></a>
+						<span class="tweet-counter">140</span>
+					</div>
+					<div class="tweet-edit-replyto">
+					</div>
+				</div>
+			</div>
+			<div id="hot-word-container">
+			</div>
+		</div>
+	</div>
+	<div id="main">
+		<div id="timeline-deck">
+			<div id="timeline-view-wrapper">
+			<ul id="timeline-view"></ul>
+			</div>
+			<ul id="timeline-tabs-bar"></ul>
+		</div>
+	</div>
+	<div id="footer"></div>
+	<div id="notification-bar"></div>
+<!-- New List Dialog -->
+<div id="newlist-content">
+	<div class="box01 box">
+		<span class="newlist-menu" transtext="newListName"></span>
+		<input type="text">
+	</div>
+	<hr/>
+	<div class="box02 box">
+		<span class="newlist-menu" transtext="newListDescription"></span>
+		<textarea></textarea>
+		<span class="newlist-desc-tips" transtext="newLisDescriptionTips"></span>
+	</div>
+	<hr/>
+	<div class="box03 box">
+		<span class="newlist-menu" transtext="newListPrivacy"></span>
+		<input class="newlist-public" type="radio" name="newListPrivacy" value="public" checked>
+		<span class="newlist-public" transtext="newListPublic"></span>
+		<span class="newlist-public-tips" transtext="newListPublicTips"></span>
+		<input class="newlist-private" type="radio" name="newListPrivacy" value="private">
+		<span class="newlist-private" transtext="newListPrivate"></span>
+		<span class="newlist-private-tips" transtext="newListPrivateTips"></span>
+	</div>
+</div>
+</body>
+</html>

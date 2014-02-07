@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title></title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../Common/css/base.css">
+<link rel="stylesheet" href="../../Common/css/style.css">
+<link rel="stylesheet" href="../../Common/css/list.css">
+<link rel="stylesheet" href="css/prof.css">
+<script src="../../Common/js/base.include.js"></script>
+<script src="../../Common/js/janet/janet.js"></script>
+<script src="../../Common/js/janet/function.js"></script>
+<script src="../../Common/js/janet/api.js"></script>
+<script src="../../Common/js/janet/common.js"></script>
+<script src="../../Common/js/janet/msgdialog.js"></script>
+<script src="../../Common/js/janet/action.js"></script>
+<script src="../../Common/js/janet/tweet.js"></script>
+<script src="../../Common/js/janet/scroll.js"></script>
+<script src="../../Common/js/janet/edgeevent.js"></script>
+<script src="../../Common/js/janet/autolink.js"></script>
+<script src="../../Common/js/janet/expandtweet.js"></script>
+<script src="../../Common/js/janet/expandurl.js"></script>
+<script src="../../Common/js/janet/thumbnail.js"></script>
+<script src="../../Common/js/janet/listdialog.js"></script>
+<script src="../../Common/js/janet/contextmenu.js"></script>
+<script src="../../Common/js/janet/tweetedit.js"></script>
+<script src="../../Common/js/janet/websocket.js"></script>
+<script src="../../Common/profile/js/profile.js"></script>
+</head>
+<body>
+	<div id="top-bar">
+		<div class="account-area" action="account" selectaction="prof-changeaccount">
+			<img class="account-icon" src="">
+			<span class="account-menu hide"></span>
+		</div>
+		<div class="message-area">
+			<span class="message"></span>
+		</div>
+	</div>
+	<div id="prof-main"></div>
+<!-- New List Dialog -->
+<div id="newlist-content">
+	<div class="box01 box">
+		<span class="newlist-menu" transtext="newListName"></span>
+		<input type="text">
+	</div>
+	<hr/>
+	<div class="box02 box">
+		<span class="newlist-menu" transtext="newListDescription"></span>
+		<textarea></textarea>
+		<span class="newlist-desc-tips" transtext="newLisDescriptionTips"></span>
+	</div>
+	<hr/>
+	<div class="box03 box">
+		<span class="newlist-menu" transtext="newListPrivacy"></span>
+		<input class="newlist-public" type="radio" name="newListPrivacy" value="public" checked>
+		<span class="newlist-public" transtext="newListPublic"></span>
+		<span class="newlist-public-tips" transtext="newListPublicTips"></span>
+		<input class="newlist-private" type="radio" name="newListPrivacy" value="private">
+		<span class="newlist-private" transtext="newListPrivate"></span>
+		<span class="newlist-private-tips" transtext="newListPrivateTips"></span>
+	</div>
+</div>
+</body>
+</html>
